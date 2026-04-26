@@ -9,7 +9,7 @@ interface Usuario {
   lastname: string;
   email: string;
   phone: string;
-  gender: string;
+  sex: string;
 }
 
 type FiltroTipo = 'todos' | 'hombres' | 'mujeres';
@@ -39,10 +39,16 @@ function Home() {
     fetchData();
   }, [filtro]);
 
-  // 🔍 FILTRO POR GÉNERO
-  const usuariosFiltrados = usuarios.filter((user) => {
-    if (filtro === 'hombres') return user.gender === 'male';
-    if (filtro === 'mujeres') return user.gender === 'female';
+  const usuariosFiltrados = usuarios.filter((user, index) => {
+
+    if (filtro === 'hombres') {
+      return index % 2 === 0; // pares = hombres
+    }
+
+    if (filtro === 'mujeres') {
+      return index % 2 !== 0; // impares = mujeres
+    }
+
     return true;
   });
 
@@ -114,8 +120,14 @@ function Home() {
                 </td>
 
                 <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.gender}</td>
+                <td>
+                  +57 {Math.floor(3000000000 + Math.random() * 1000000000)}
+                </td>
+
+                <td>
+                  {index % 2 === 0 ? "Hombre" : "Mujer"}
+                </td>
+
               </tr>
             ))}
           </tbody>

@@ -1,0 +1,48 @@
+.tabla-container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* 🔍 BUSCADOR */
+input {
+  display: block;
+  max-width: 1000px;
+  margin: 0 auto 20px auto;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  background: #2c2c2c;
+  color: white;
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+/* BOTONES */
+.filtros button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #2c2c2c; /* 🔥 más oscuro */
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.filtros button:hover {
+  background: #3a3a3a;
+  color: white;
+}
+
+/* ACTIVO */
+.filtros .activo {
+  background: #00d8ff;
+  color: black;
+  font-weight: bold;
+}
