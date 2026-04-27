@@ -26,27 +26,27 @@ function App() {
 
           <nav className="c-menu">
             <Link to="/">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDy9mBtyJWUPLRobv__N2OwHYdiKAWarKroQ&s" />
+              <img src="https://cdn-icons-png.flaticon.com/128/1946/1946488.png" />
               <p>Home</p>
             </Link>
 
             <Link to="/favoritos">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwirKiGL1VFlx1A456XT5nxNyWds8y4-K5zg&s" />
+              <img src="https://cdn-icons-png.flaticon.com/128/1068/1068731.png" />
               <p>Favoritos</p>
             </Link>
 
             <Link to="/original">
-              <img src="https://media.istockphoto.com/id/1448912272/vector/soccer-ball-icon-football-game-ball-icons.jpg?s=170667a&w=0&k=20&c=BppyhfxxHRxTSk_1urxYxFTh9a-UprsyYm5vI0XC7Lg=" />
+              <img src="https://cdn-icons-png.flaticon.com/128/14886/14886129.png" />
               <p>Original</p>
             </Link>
 
             <Link to="/informativa">
-              <img src="https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/more-info-icon.png" />
+              <img src="https://cdn-icons-png.flaticon.com/128/8/8201.png" />
               <p>Informativa</p>
             </Link>
 
             <Link to="/usuario">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNzXYh-X4wxX1jfbPywa8HWoNGDnx1Tlo0-g&s" />
+              <img src="https://cdn-icons-png.flaticon.com/128/6676/6676016.png" />
               <p>Usuario</p>
             </Link>
           </nav>
