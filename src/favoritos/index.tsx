@@ -6,35 +6,57 @@ interface Usuario {
   firstname: string;
   lastname: string;
   email: string;
-  phone: string;
-  gender: string;
+  ip: string;
 }
 
 function Favoritos() {
-  const [favorites, setFavorites] = useState<Usuario[]>([]);
+  const [favoritos, setFavoritos] = useState<Usuario[]>([]);
 
-  // 🔁 cargar favoritos desde localStorage
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("favs") || "[]");
-    setFavorites(stored);
+    const storedUsers = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    const storedFavs = JSON.parse(localStorage.getItem("favoritos") || "[]");
+
+    const filtrados = storedUsers.filter((user: Usuario) =>
+      storedFavs.includes(user.id)
+    );
+
+    setFavoritos(filtrados);
   }, []);
 
   return (
-    <div>
-      <h1>Favoritos</h1>
+    <div className="tabla-container">
+      <h2>Usuarios Favoritos</h2>
 
-      {favorites.length === 0 ? (
-        <p>No tienes usuarios favoritos</p>
+      {favoritos.length === 0 ? (
+        <p>No tienes favoritos aún</p>
       ) : (
-        <ul>
-          {favorites.map((user) => (
-            <li key={user.id}>
-              <Link to={`/usuario/${user.id}`}>
-                {user.firstname} {user.lastname}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <table className="tabla-posiciones">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>IP</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {favoritos.map((user, index) => (
+              <tr key={user.id}>
+                <td>{index + 1}</td>
+
+                <td>
+                  <Link to={`/usuario/${user.id}`}>
+                    {user.firstname} {user.lastname}
+                  </Link>
+                </td>
+
+                <td>{user.email}</td>
+                <td>{user.ip}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

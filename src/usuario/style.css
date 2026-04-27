@@ -1,28 +1,98 @@
-.user-container {
-  padding: 20px;
+/* 🔲 CONTENEDOR GENERAL */
+.usuario-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #f8fafc;
 }
 
-.card-user {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.card-user h1 {
+/* 🟦 TARJETA */
+.card-usuario {
+  background: #e0f2fe;
+  padding: 40px;
+  border-radius: 20px;
+  width: 420px;
   text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  position: relative; /* 🔥 IMPORTANTE PARA EL BOTÓN */
 }
 
-.card-user p {
+/* 🖼️ IMAGEN CENTRADA */
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #38bdf8;
+  margin: 0 auto 20px auto; /* 🔥 centra */
+  display: block;
+}
+
+/* 👤 NOMBRE */
+.card-usuario h1 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #0c4a6e;
+}
+
+/* 📊 INFO */
+.info {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.info p {
   margin: 10px 0;
+  font-size: 16px;
+  color: #075985;
 }
 
-.descripcion {
-  margin-top: 15px;
-  font-style: italic;
-  color: #555;
+.info span {
+  font-weight: bold;
+  color: #0c4a6e;
+}
+
+/* ❤️ BOTÓN FAVORITO */
+.btn-fav {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  width: 55px;
+  height: 55px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: #38bdf8;
+  color: white;
+
+  font-size: 24px; /* 🔥 corazón más grande */
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* 🔥 HOVER */
+.btn-fav:hover {
+  background: #0ea5e9;
+  transform: scale(1.1);
+}
+
+/* ❤️ CUANDO ES FAVORITO */
+.btn-fav.activo {
+  background: #ef4444;
+}
+
+/* ⏳ LOADING */
+.loading {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 18px;
 }

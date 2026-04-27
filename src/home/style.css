@@ -1,48 +1,18 @@
-.tabla-container {
-  max-width: 1000px;
-  margin: auto;
+u {
+  background-color: yellow;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
-/* 🔍 BUSCADOR */
-input {
-  display: block;
-  max-width: 1000px;
-  margin: 0 auto 20px auto;
-  padding: 12px;
-  width: 100%;
-  border-radius: 8px;
-  border: none;
-  background: #2c2c2c;
-  color: white;
-}
-
-.filtros {
-  display: flex;
-  gap: 10px;
-  max-width: 1000px;
-  margin: 20px auto;
-}
-
-/* BOTONES */
-.filtros button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  background: #2c2c2c; /* 🔥 más oscuro */
-  color: #ccc;
-  cursor: pointer;
+.resaltado {
+  background-color: #1e293b; /* azul oscuro */
+  color: white; /* texto blanco */
+  font-weight: bold;
   transition: 0.3s;
 }
 
-/* HOVER */
-.filtros button:hover {
-  background: #3a3a3a;
+.resaltado td {
   color: white;
 }
 
-/* ACTIVO */
-.filtros .activo {
-  background: #00d8ff;
-  color: black;
-  font-weight: bold;
-}
+

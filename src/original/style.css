@@ -1,47 +1,46 @@
-.filtros {
-  display: flex;
-  gap: 10px;
+.original-container {
+  text-align: center;
+  padding: 30px;
+}
+
+.card-original {
+  margin: auto;
+  background: #e0f2fe;
+  padding: 30px;
+  border-radius: 20px;
+  width: 350px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card-original img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   margin-bottom: 15px;
 }
 
-.filtros button {
-  padding: 8px 12px;
+.card-original h2 {
+  margin-bottom: 15px;
+}
+
+.botones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.botones button {
+  padding: 10px 15px;
   border: none;
-  background: #ddd;
+  border-radius: 10px;
   cursor: pointer;
-  border-radius: 5px;
 }
 
-.filtros .activo {
-  background: #28a745;
+.fav {
+  font-size: 20px;
+}
+
+.fav.activo {
+  background: #ef4444;
   color: white;
-}
-
-input {
-  padding: 10px;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.tabla-container {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-th {
-  background: #222;
-  color: white;
-}
-
-.resaltado {
-  background-color: #ffeaa7;
 }

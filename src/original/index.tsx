@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import "./style.css";
 
 interface Usuario {
@@ -6,121 +7,109 @@ interface Usuario {
   firstname: string;
   lastname: string;
   email: string;
-  birthday: string;
+  ip: string;
+  username: string;
+  website: string;
 }
-
-type FiltroTipo = "todos" | "jovenes" | "adultos" | "mayores";
 
 function Original() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-  const [filtro, setFiltro] = useState<FiltroTipo>("todos");
-  const [busqueda, setBusqueda] = useState("");
+  const [usuarioRandom, setUsuarioRandom] = useState<Usuario | null>(null);
+  const [esFavorito, setEsFavorito] = useState(false);
 
-  const filtros: FiltroTipo[] = ["todos", "jovenes", "adultos", "mayores"];
-
+  // 🚀 CARGAR USUARIOS (LOCAL O API)
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          "https://fakerapi.it/api/v2/users?_quantity=20"
-        );
-        const data = await res.json();
-        setUsuarios(data.data);
-      } catch (error) {
-        console.error("Error cargando usuarios:", error);
-      }
-    };
+    const stored = localStorage.getItem("usuarios");
 
-    fetchData();
+    if (stored) {
+      const data = JSON.parse(stored);
+      setUsuarios(data);
+      generarRandom(data);
+    } else {
+      fetchData();
+    }
   }, []);
 
-  // 🎂 calcular edad
-  const calcularEdad = (fecha: string) => {
-    const nacimiento = new Date(fecha);
-    const hoy = new Date();
-    return hoy.getFullYear() - nacimiento.getFullYear();
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`https://fakerapi.it/api/v2/users?_quantity=20`);
+      const data = await res.json();
+
+      setUsuarios(data.data);
+      localStorage.setItem("usuarios", JSON.stringify(data.data));
+
+      generarRandom(data.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  // 🔍 filtro por edad
-  const usuariosFiltrados = usuarios.filter((user) => {
-    const edad = calcularEdad(user.birthday);
+  // 🎲 GENERAR USUARIO ALEATORIO
+  const generarRandom = (lista: Usuario[]) => {
+    const random = lista[Math.floor(Math.random() * lista.length)];
+    setUsuarioRandom(random);
 
-    if (filtro === "jovenes") return edad < 25;
-    if (filtro === "adultos") return edad >= 25 && edad < 50;
-    if (filtro === "mayores") return edad >= 50;
+    const favs = JSON.parse(localStorage.getItem("favoritos") || "[]");
+    setEsFavorito(favs.includes(random.id));
+  };
 
-    return true;
-  });
+  const cambiarUsuario = () => {
+    if (usuarios.length > 0) {
+      generarRandom(usuarios);
+    }
+  };
 
-  // 🔎 buscador
-  const usuariosBusqueda = usuariosFiltrados.filter((user) =>
-    busqueda.length < 3
-      ? true
-      : user.firstname.toLowerCase().includes(busqueda.toLowerCase()) ||
-        user.lastname.toLowerCase().includes(busqueda.toLowerCase())
-  );
+  // ❤️ FAVORITOS
+  const toggleFavorito = () => {
+    if (!usuarioRandom) return;
+
+    const favs = JSON.parse(localStorage.getItem("favoritos") || "[]");
+
+    let nuevos;
+
+    if (favs.includes(usuarioRandom.id)) {
+      nuevos = favs.filter((id: number) => id !== usuarioRandom.id);
+    } else {
+      nuevos = [...favs, usuarioRandom.id];
+    }
+
+    localStorage.setItem("favoritos", JSON.stringify(nuevos));
+    setEsFavorito(!esFavorito);
+  };
+
+  if (!usuarioRandom) return <p>Cargando...</p>;
 
   return (
-    <>
-      {/* 🔘 filtros */}
-      <div className="filtros">
-        {filtros.map((f) => (
+    <div className="original-container">
+
+      <h1>🎲 Usuario Destacado</h1>
+
+      <div className="card-original">
+
+        <img
+          src={`https://i.pravatar.cc/300?img=${usuarioRandom.id}`}
+          alt="usuario"
+        />
+
+        <h2>{usuarioRandom.firstname} {usuarioRandom.lastname}</h2>
+
+        <p><strong>Email:</strong> {usuarioRandom.email}</p>
+        <p><strong>IP:</strong> {usuarioRandom.ip}</p>
+        <p><strong>Username:</strong> {usuarioRandom.username}</p>
+
+        <div className="botones">
+          <button onClick={cambiarUsuario}>🔄 Otro usuario</button>
+
           <button
-            key={f}
-            onClick={() => setFiltro(f)}
-            className={filtro === f ? "activo" : ""}
+            className={`fav ${esFavorito ? "activo" : ""}`}
+            onClick={toggleFavorito}
           >
-            {f}
+            {esFavorito ? "❤️" : "🤍"}
           </button>
-        ))}
+        </div>
+
       </div>
-
-      {/* 🔍 buscador */}
-      <input
-        type="text"
-        placeholder="Buscar usuario..."
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-      />
-
-      {/* 📊 tabla */}
-      <div className="tabla-container">
-        <h2>Usuarios por Edad</h2>
-
-        <table className="tabla-posiciones">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Edad</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {usuariosBusqueda.map((user, index) => (
-              <tr
-                key={user.id}
-                className={
-                  busqueda.length >= 3 &&
-                  (user.firstname.toLowerCase().includes(busqueda.toLowerCase()) ||
-                    user.lastname.toLowerCase().includes(busqueda.toLowerCase()))
-                    ? "resaltado"
-                    : ""
-                }
-              >
-                <td>{index + 1}</td>
-                <td>
-                  {user.firstname} {user.lastname}
-                </td>
-                <td>{user.email}</td>
-                <td>{calcularEdad(user.birthday)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+    </div>
   );
 }
 
