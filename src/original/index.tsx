@@ -17,7 +17,6 @@ function Original() {
   const [usuarioRandom, setUsuarioRandom] = useState<Usuario | null>(null);
   const [esFavorito, setEsFavorito] = useState(false);
 
-  // 🚀 CARGAR USUARIOS (LOCAL O API)
   useEffect(() => {
     const stored = localStorage.getItem("usuarios");
 
@@ -44,7 +43,6 @@ function Original() {
     }
   };
 
-  // 🎲 GENERAR USUARIO ALEATORIO
   const generarRandom = (lista: Usuario[]) => {
     const random = lista[Math.floor(Math.random() * lista.length)];
     setUsuarioRandom(random);
@@ -59,7 +57,6 @@ function Original() {
     }
   };
 
-  // ❤️ FAVORITOS
   const toggleFavorito = () => {
     if (!usuarioRandom) return;
 

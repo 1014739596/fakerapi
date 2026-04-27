@@ -20,7 +20,6 @@ function Home() {
 
   const filtros: FiltroTipo[] = ['todos', 'ip'];
 
-  // 🚀 CARGA OPTIMIZADA
   useEffect(() => {
     const stored = localStorage.getItem("usuarios");
 
@@ -44,7 +43,6 @@ function Home() {
     }
   }, []);
 
-  // 🔍 FUNCIÓN DE COINCIDENCIA
   const coincideBusqueda = (user: Usuario) => {
     if (busqueda.length < 3) return false;
 
@@ -56,7 +54,6 @@ function Home() {
     );
   };
 
-  // 🔥 ORDEN SOLO POR RELEVANCIA (NO IP)
   const usuariosFinal = [...usuarios].sort((a, b) => {
     if (coincideBusqueda(a) && !coincideBusqueda(b)) return -1;
     if (!coincideBusqueda(a) && coincideBusqueda(b)) return 1;
@@ -65,7 +62,7 @@ function Home() {
 
   return (
     <>
-      {/* 🔘 FILTROS */}
+      {}
       <div className="filtros">
         {filtros.map((f) => (
           <button
@@ -78,7 +75,7 @@ function Home() {
         ))}
       </div>
 
-      {/* 🔍 BUSCADOR */}
+      {}
       <input
         type="text"
         placeholder="Buscar..."
@@ -86,7 +83,7 @@ function Home() {
         onChange={(e) => setBusqueda(e.target.value)}
       />
 
-      {/* 📊 TABLA */}
+      {}
       <div className="tabla-container">
         <h2>Usuarios</h2>
 
@@ -95,7 +92,7 @@ function Home() {
             <tr>
               <th>#</th>
 
-              {/* 🔄 CAMBIO DE ORDEN SEGÚN FILTRO */}
+              {}
               {filtro === 'todos' ? (
                 <>
                   <th>Nombre</th>
@@ -124,7 +121,7 @@ function Home() {
                 >
                   <td>{index + 1}</td>
 
-                  {/* 🔄 ORDEN DINÁMICO */}
+                  {}
                   {filtro === 'todos' ? (
                     <>
                       <td>
